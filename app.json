@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "creator-studio",
+    "slug": "creator-studio",
+    "description": "Vlogmi Creator Studio!",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/vlogmi.webp",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b7f8f0d6-4734-4131-a21c-638dd82ac9a2"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b7f8f0d6-4734-4131-a21c-638dd82ac9a2"
+    }
+  }
+}
