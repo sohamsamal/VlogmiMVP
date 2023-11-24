@@ -35,7 +35,7 @@ export default function Recommender() {
     setApiBlurb2('');
 
 
-    if (handle !== 'asd') {
+    if (handle !== 'lukethorssen') {
       setBlurb("Please put in a valid account.");
       setLoading(false);
       return;
