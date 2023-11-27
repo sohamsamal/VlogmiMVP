@@ -25,12 +25,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/b7f8f0d6-4734-4131-a21c-638dd82ac9a2"
+      "url": "https://u.expo.dev/e7ea4786-2778-42de-8e76-1143b319ddde"
     }
   }
 }
