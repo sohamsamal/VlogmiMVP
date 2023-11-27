@@ -7,7 +7,6 @@ const ContentCard = ({ title, description, onPress }) => {
     <Pressable onPress={() => { onPress && onPress() }} >
       {({ pressed }) =>
         <LinearGradient colors={pressed ? ["#1A1A1A", "#444444"] : ["#161616", "#353535"]} style={{
-          margin: 16,
           borderRadius: 40,
         }}>
           <View style={styles.cardContainer}>
@@ -27,12 +26,9 @@ const ContentCard = ({ title, description, onPress }) => {
                 source={require('../../assets/icons/favorite.png')} // Replace with your local logo image path
               />
             </View>
-
           </View>
         </LinearGradient>
       }
-
-
     </Pressable>
   );
 };

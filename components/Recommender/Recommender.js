@@ -3,18 +3,15 @@ import { SafeAreaView, Text, TextInput, TouchableOpacity, ActivityIndicator, Sty
 import Typewriter from 'react-native-typewriter';
 import axios from 'axios'; // Import Axios
 import ContentCard from '../ContentCard/ContentCard';
-import ActionSheet from 'react-native-actions-sheet';
 
-import { LinearGradient } from 'expo-linear-gradient';
-
-export default function Recommender() {
+export default function Recommender({ handleShow }) {
   const [handle, setHandle] = useState('');
   const [loading, setLoading] = useState(false);
   const [blurb, setBlurb] = useState('');
   const [blurb2, setBlurb2] = useState('');
   const [typedMessages, setTypedMessages] = useState([]);
   const [animationsCompleted, setAnimationsCompleted] = useState(false); // New state for tracking animations completion
-
+  const [showContent, setShowContent] = useState(false)
 
   const messages = [
     "Analyzing your followers' taste...",
@@ -35,7 +32,7 @@ export default function Recommender() {
     setApiBlurb2('');
 
 
-    if (handle !== 'lukethorssen') {
+    if (handle !== 'asd') {
       setBlurb("Please put in a valid account.");
       setLoading(false);
       return;
@@ -71,6 +68,7 @@ export default function Recommender() {
       setLoading(false);
       setAnimationsCompleted(true);
       setTypedMessages([]);
+      handleShow && handleShow()
       // setBlurb(apiBlurb || `It's recommended to focus on lifestyle content with a blend of travel and fashion. Engaging with followers through stories and regular posts about daily activities would be beneficial.`);
     }
   };
@@ -128,18 +126,41 @@ export default function Recommender() {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        style={styles.logo}
-        source={require('./logp.png')} // Replace with your local logo image path
+        style={{
+          width: 300, marginTop: 20,
+          resizeMode: 'contain',
+          marginTop: 20,
+        }}
+        source={require('../../assets/logo-2.png')} // Replace with your local logo image path
       />
-      <Text style={styles.greetingText}>Hey, {handle || 'there!'}</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={text => setHandle(text)}
-        value={handle}
-        placeholder="Enter Instagram Handle"
-        placeholderTextColor="#999"
-        autoCapitalize="none"
-      />
+      <View style={{
+        display: 'flex', flexDirection: 'row', alignItems: 'center',
+        width: '80%', gap: 8, marginBottom: 20
+      }}>
+        <TextInput
+          style={{
+            height: 50,
+            borderColor: 'gray',
+            borderWidth: 1,
+            borderRadius: 25,
+            paddingHorizontal: 20,
+            color: '#FFF', flex: 1
+          }}
+          onChangeText={text => setHandle(text)}
+          value={handle}
+          placeholder="Enter Instagram Handle"
+          placeholderTextColor="#999"
+          autoCapitalize="none"
+        />
+        <TouchableOpacity onPress={() => setShowContent(s => !s)}>
+          <Image style={{ width: 40, height: 40 }}
+            source={require('../../assets/icons/icon-1.png')}
+          />
+        </TouchableOpacity>
+      </View>
+      {showContent && (
+        <Text style={{ width: '80%', color: "white", marginBottom: 20, textAlign: "center" }}>Good Behavior: A clothing/accessory brand made with the sales of retired fishing boats.</Text>
+      )}
       <TouchableOpacity style={styles.button} onPress={handleGenerate}>
         {loading ? (
           <ActivityIndicator size="small" color="#FFF" />
@@ -165,61 +186,6 @@ export default function Recommender() {
           )}
         </View>
       )}
-      <View style={
-        {
-          display: 'flex',
-          flexDirection: 'column',
-        }
-      }>
-        {animationsCompleted && renderContent()}
-        {animationsCompleted && renderContent2()}
-      </View>
-      <ActionSheet containerStyle={{ backgroundColor: "transparent" }} ref={actionSheetRef}>
-        <LinearGradient colors={["#161616", "#353535"]} style={{
-          height: '100%'
-        }}>
-          <ScrollView>
-            <View style={{ marginTop: 40, marginBottom: 40, marginLeft: 35, marginRight: 35, position: "relative" }}>
-              <Pressable onPress={() => actionSheetRef.current?.hide()}><Image style={{ width: 30, height: 30, position:"absolute", top: 0, right: 0 }} source={require('../../assets/icons/expand_down.png')} /></Pressable>
-              <Text style={{ fontSize: 35, textAlign: "center", color: "#FFF", marginBottom: 20 }} >🔥🔥🔥</Text>
-              <Text style={{ color: "white", fontSize: 30, textAlign: "center", color: "#FFF", marginBottom: 20 }}>Barbie Movie Makeup: Pink glam makeup tutorial</Text>
-              <Text style={{ color: "white", fontSize: 16, fontWeight: 600 }}>Caption:</Text>
-              <Text style={{ color: "white", fontSize: 16, marginBottom: 16 }}>"Transforming into a real-life Barbie! 💖 Join me on this pink glam makeup journey from start to finish, and let's embrace our inner doll together! 🎀 </Text>
-              <Text style={{ color: "white", fontSize: 16, }}>Tags:</Text>
-              <Text style={{ color: "white", fontSize: 16, }}>#BarbieMakeup</Text>
-              <Text style={{ color: "white", fontSize: 16, }}>#GlamTutorial</Text>
-              <Text style={{ color: "white", fontSize: 16, }}>#PinkGlam</Text>
-              <Text style={{ color: "white", fontSize: 16, }}>#DollInspired</Text>
-              <Text style={{ color: "white", fontSize: 16, marginBottom: 16 }}>#MakeupMagic</Text>
-              <Text style={{ color: "white", fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>VIDEO OUTLINE:</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Introduction</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Greet your audience with enthusiasm.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Briefly introduce the Barbie glam makeup theme.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Showcasing the Products</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Display and talk about the makeup products you'll be using.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Emphasize that everything is authentic and unfiltered.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Introduction</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Greet your audience with enthusiasm.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Briefly introduce the Barbie glam makeup theme.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Showcasing the Products</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Display and talk about the makeup products you'll be using.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Emphasize that everything is authentic and unfiltered.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Introduction</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Greet your audience with enthusiasm.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Briefly introduce the Barbie glam makeup theme.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Showcasing the Products</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Display and talk about the makeup products you'll be using.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Emphasize that everything is authentic and unfiltered.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Introduction</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Greet your audience with enthusiasm.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text> Briefly introduce the Barbie glam makeup theme.</Text>
-              <Text style={{ color: "white", fontWeight: "bold", marginTop: 10 }} >Showcasing the Products</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Display and talk about the makeup products you'll be using.</Text>
-              <Text style={{ color: "white", marginLeft: 10 }} ><Text>{'\u2022'}</Text>Emphasize that everything is authentic and unfiltered.</Text>
-            </View>
-          </ScrollView>
-        </LinearGradient>
-      </ActionSheet>
     </SafeAreaView>
   );
 }
@@ -229,6 +195,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
     alignItems: 'center',
+    justifyContent: 'center',
     width: '100%'
   },
   logo: {
