@@ -32,7 +32,7 @@ export default function Recommender({ handleShow }) {
     setApiBlurb2('');
 
 
-    if (handle !== 'asd') {
+    if (handle !== 'lukethorssen') {
       setBlurb("Please put in a valid account.");
       setLoading(false);
       return;
