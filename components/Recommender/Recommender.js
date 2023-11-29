@@ -157,7 +157,7 @@ export default function Recommender({ handleShow, checkProductIcon, setCheckProd
         </TouchableOpacity>
       </View>
       {checkProductIcon && (
-        <Text style={{ width: '80%', color: "white", marginBottom: 20, textAlign: "center" }}>Good Behavior: A clothing/accessory brand made with the sale of retired fishing boats.</Text>
+        <Text style={{ width: '80%', color: "white", marginBottom: 20, textAlign: "center" }}>Good Behavior: A clothing/accessory brand made with the sails of retired fishing boats.</Text>
       )}
       <TouchableOpacity style={styles.button} onPress={handleGenerate}>
         {loading ? (
