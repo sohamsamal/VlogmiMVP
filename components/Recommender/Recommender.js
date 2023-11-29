@@ -4,14 +4,13 @@ import Typewriter from 'react-native-typewriter';
 import axios from 'axios'; // Import Axios
 import ContentCard from '../ContentCard/ContentCard';
 
-export default function Recommender({ handleShow }) {
+export default function Recommender({ handleShow, checkProductIcon, setCheckProductIcon, handleChangeUser, userNames }) {
   const [handle, setHandle] = useState('');
   const [loading, setLoading] = useState(false);
   const [blurb, setBlurb] = useState('');
   const [blurb2, setBlurb2] = useState('');
   const [typedMessages, setTypedMessages] = useState([]);
   const [animationsCompleted, setAnimationsCompleted] = useState(false); // New state for tracking animations completion
-  const [showContent, setShowContent] = useState(false)
 
   const messages = [
     "Analyzing your followers' taste...",
@@ -22,7 +21,6 @@ export default function Recommender({ handleShow }) {
   const [apiBlurb, setApiBlurb] = useState('');
   const [apiBlurb2, setApiBlurb2] = useState('');
 
-
   const handleGenerate = () => {
     setLoading(true);
     setBlurb('');
@@ -32,7 +30,7 @@ export default function Recommender({ handleShow }) {
     setApiBlurb2('');
 
 
-    if (handle !== 'lukethorssen') {
+    if (!Object.keys(userNames).includes(handle)) {
       setBlurb("Please put in a valid account.");
       setLoading(false);
       return;
@@ -146,20 +144,20 @@ export default function Recommender({ handleShow }) {
             paddingHorizontal: 20,
             color: '#FFF', flex: 1
           }}
-          onChangeText={text => setHandle(text)}
+          onChangeText={text => { setHandle(text), handleChangeUser(text) }}
           value={handle}
           placeholder="Enter Instagram Handle"
           placeholderTextColor="#999"
           autoCapitalize="none"
         />
-        <TouchableOpacity onPress={() => setShowContent(s => !s)}>
+        <TouchableOpacity onPress={() => setCheckProductIcon(s => !s)}>
           <Image style={{ width: 40, height: 40 }}
             source={require('../../assets/icons/icon-1.png')}
           />
         </TouchableOpacity>
       </View>
-      {showContent && (
-        <Text style={{ width: '80%', color: "white", marginBottom: 20, textAlign: "center" }}>Good Behavior: A clothing/accessory brand made with the sales of retired fishing boats.</Text>
+      {checkProductIcon && (
+        <Text style={{ width: '80%', color: "white", marginBottom: 20, textAlign: "center" }}>Good Behavior: A clothing/accessory brand made with the sale of retired fishing boats.</Text>
       )}
       <TouchableOpacity style={styles.button} onPress={handleGenerate}>
         {loading ? (
