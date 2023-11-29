@@ -7,9 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import ViewDetails from './components/Views/View';
 
 const userNames = {
-  "lukethorssen": "Luke",
-  "rafaellathorssen": "Rafaellat",
-  "alexalitonjua": "Alexalitonjua"
+  "lukethorssen": { name: "Luke", img: require("./assets/luke.png") },
+  "rafaellathorssen": { name: "Rafaella", img: require("./assets/rafaella.png") },
 }
 
 export default function App() {
@@ -29,9 +28,9 @@ export default function App() {
               <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <View>
                   <Text style={{ color: "white", fontWeight: 800, fontSize: 32 }} >Hey,</Text>
-                  <Text style={{ color: "white", fontWeight: 800, fontSize: 32, marginBottom: 12 }} >{userNames[user]}</Text>
+                  <Text style={{ color: "white", fontWeight: 800, fontSize: 32, marginBottom: 12 }} >{userNames[user]?.name}</Text>
                 </View>
-                <Image style={{ width: 60, height: undefined, aspectRatio: 1 }} source={require('./assets/image.png')} />
+                {userNames[user]?.img && <Image style={{ width: 60, height: undefined, aspectRatio: 1 }} source={userNames[user]?.img} />}
               </View>
               <Text style={{ color: "white", marginBottom: 16 }}>ANALYTICS</Text>
             </View>
